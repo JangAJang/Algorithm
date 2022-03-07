@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th= "http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시물 리스트 페이지</title>
+</head>
+<style>
+    .layout{
+        width : 500px;
+        margin : 0 auto;
+    }
+</style>
+<body>
+<div class = "layout">
+    <table>
+        <thead>
+            <tr>
+                <th>글번호</th>
+                <th>제목</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="crud : ${list}">
+            <td th:text="${crud.id}"></td>
+            <td>
+                <a th:text="${crud.title}" th:href="@{/crud/read(id=${crud.id})}"></a>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+    <th:block th:each="page : ${#numbers.sequence(startpage, endpage)}">
+        <a th:if="${page!=nowpage}" th:href="@{/crud/list(page=${page-1}, searchKeyword=${param.searchKeyword})}" th:text="${page}"></a>
+        <strong th:if="${page==nowpage}" th:text="${page}" style="color : red"></strong>
+    </th:block>
+    <form th:action="@{/crud/list}" method="get">
+        <input type="text" name="searchKeyword">
+        <button type="submit">검색</button>
+    </form>
+</div>
+
+</body>
+</html>

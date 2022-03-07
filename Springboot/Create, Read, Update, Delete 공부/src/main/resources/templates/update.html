@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 수정(update)</title>
+</head>
+
+<style >
+    .layout{
+        width : 500px;
+        margin : 0 auto;
+    }
+    .layout input {
+        width : 100%;
+        box-sizing : border-box;
+        margin : 10px;
+    }
+    .layout textarea{
+        width : 100%;
+        min-height : 300px;
+        margin-top: 10px;
+    }
+</style>
+<body>
+<div class="layout">
+    <form th:action="@{/crud/updatepro/{id}(id=${crud.id})}" method = "post">
+        <input name = "title" type = "text" th:value="${crud.title}">
+        <textarea name = "content" th:text="${crud.content}">  </textarea>
+        <button type = "submit">수정</button>
+    </form>
+</div>
+</body>
+</html>
