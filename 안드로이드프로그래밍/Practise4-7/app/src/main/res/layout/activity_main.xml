@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <CheckBox
+        android:id="@+id/enable"
+        android:text="Enable 속성"
+        android:checked="false"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        />
+    <CheckBox
+        android:id="@+id/clickable"
+        android:text="Clickable 속성"
+        android:checked="false"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        />
+    <CheckBox
+        android:id="@+id/angle"
+        android:text="45도 회전"
+        android:checked="false"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        />
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        android:text="Button"
+        android:enabled="false"
+        android:clickable="false"
+        android:rotation="0"
+        />
+</LinearLayout>
