@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BMI Calculator"
+        android:textSize="30dp"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+
+        />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter your weight(kg)"
+        android:textSize="28dp"
+        android:layout_margin="10dp"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="     weight     "
+        android:textSize="28dp"
+        android:layout_margin="10dp"
+        android:id="@+id/weightinput"
+        />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter your height(m)"
+        android:textSize="28dp"
+        android:layout_margin="10dp"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="     height     "
+        android:textSize="28dp"
+        android:layout_margin="10dp"
+        android:id="@+id/heightinput"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        android:text="CALCULATE MY BMI"
+        android:id="@+id/button"
+        />
+
+    <TextView
+        android:id="@+id/bmiresult"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Your BMI : __________"
+        android:textSize="20dp"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/bmicat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your BMI category appears here"
+        android:textSize="20dp"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        />
+
+</LinearLayout>
