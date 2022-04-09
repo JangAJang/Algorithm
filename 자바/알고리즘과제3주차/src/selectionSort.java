@@ -1,14 +1,14 @@
 public class selectionSort{
     public static void main(String[] args){
-        long start = System.nanoTime();
         int[] A = new int[200];
         for(int i=0; i<200; i++){
-            A[i] = (int)(Math.random()*100);
+            A[i] = (int)(Math.random()*1000);
         }
+        long start = System.nanoTime();
         selectionSort(A, 200);
         long end = System.nanoTime();
         System.out.println(A[99]);
-        System.out.println(end - start);
+        System.out.println((end - start));
     }
 
     static void selectionSort(int[] A, int n){

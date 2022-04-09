@@ -1,13 +1,13 @@
 public class insertionSort {
     public static void main(String[] args){
-        long start = System.nanoTime();
-        int[] A = new int [200];
-        for(int i=0; i<200; i++){
-            A[i] = (int)(Math.random()*100);
+        int[] A = new int [20000];
+        for(int i=0; i<20000; i++){
+            A[i] = (int)(Math.random()*100000);
         }
+        long start = System.currentTimeMillis();
         insertSort(A, 1);
+        long end = System.currentTimeMillis();
         System.out.println(A[101]);
-        long end = System.nanoTime();
         System.out.println(end - start);
     }
 

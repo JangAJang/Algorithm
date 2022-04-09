@@ -13,13 +13,17 @@ public class InsertionSort {
 
     static void insertSort(int[] A, int n){
         if(n == A.length) return ;
-        for(int i=0; i<n; i++){
-            if(A[i] > A[n]){
-                int tmp = A[n];
-                A[n] = A[i];
-                A[i] = tmp;
+        if(A[n] > A[n-1]) insertSort(A, n+1);
+        else {
+            for (int i = 0; i < n; i++) {
+                if (A[i] > A[n]) {
+                    int tmp = A[n];
+                    A[n] = A[i];
+                    A[i] = tmp;
+                    break;
+                }
             }
+            insertSort(A, n + 1);
         }
-        insertSort(A, n+1);
     }
 }

@@ -2,15 +2,15 @@ public class MergeSort {
     public static int[] A;
     public static int[] tmp;
     public static void main(String[] args) {
-        long start = System.nanoTime();
-        A = new int[200];
-        for(int i=0; i<200; i++){
-            A[i] = (int)(Math.random()*100);
+        A = new int[20000];
+        for(int i=0; i<20000; i++){
+            A[i] = (int)(Math.random()*100000);
         }
         tmp = new int[A.length];
+        long start = System.currentTimeMillis();
         mergeSort(0, A.length-1);
         System.out.println(A[102]);
-        long end = System.nanoTime();
+        long end = System.currentTimeMillis();
         System.out.println(end-start);
     }
 
