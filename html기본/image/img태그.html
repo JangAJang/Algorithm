@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+    <head>
+        <title>img태그(이미지)</title>
+    </head>
+    <body>
+        <img src="../esense.jpg" alt="이센스" width="100"> <!--빈 태그이다. /를 이용해 내부 폴더를 구성할 수 있다. -->
+        <!--'../'는 상위 폴더라는 뜻-->
+        <img src="./photo/gaeko.jpg" alt="개코" height="100"> <!--alt는 대체 텍스트를 넣어서, 이미지가 없어도 대체값이 출력됨-->
+        <!--width, height는 px단위로 설정되며, 둘을 같이 넣으면 사이즈는 맞지만, 비율이 임의로 조정되어 원래 비율과 달라진다. -->
+        <!--html이 있는 파일 내부에서 사진을 가져오므로, 내부 리소스 사용 방법이다. -->
+
+        
+        <a href="https://www.google.co.kr">
+            <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_272x92dp.png">
+            <!--외부 리소스 사용을 할 때에는 사진의 주소를 가져와, src에 넣는다. 사진을 a태그 안에 넣어서 사진을 눌렀을 때 이동하게 할 수 있다.-->
+        </a>
+    </body>
+</html>
