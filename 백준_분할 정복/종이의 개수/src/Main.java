@@ -11,14 +11,17 @@ public class Main {
     static int MinusOne=0;
 
     static void cutting(int row, int col, int size){
-        if(isSameNumber(row, col, size) || size == 1){
+        if(isSameNumber(row, col, size)){
             if(arr[row][col] == 1) One++;
             else if(arr[row][col] == 0) Zero++;
             else MinusOne++;
+            return;
         }
-        for(int i=0; i<3; i++){
-            for(int j=0; j<3; j++){
-                cutting( size/3*i, size/3*i, size/3);
+        else{
+            for(int i=0; i<3; i++){
+                for(int j=0; j<3; j++){
+                    cutting( row + size/3*i, col + size/3*j, size/3);
+                }
             }
         }
     }
