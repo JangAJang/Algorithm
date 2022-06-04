@@ -8,7 +8,7 @@ public class Main {
         BufferedReader br  = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
         int n = Integer.parseInt(st.nextToken());
-        int b = Integer.parseInt(st.nextToken());
+        long b = Integer.parseInt(st.nextToken());
         long[][] arr = new long[n][n];
         for(int i=0; i<n; i++){
             st = new StringTokenizer(br.readLine(), " ");
@@ -25,8 +25,8 @@ public class Main {
         }
     }
 
-    public static long[][] PoweredMatrix(int n, int b, long[][] arr){
-        if(b == 2) return solution(arr, arr);
+    public static long[][] PoweredMatrix(long n, long b, long[][] arr){
+        if(b == 2) return arr;
         else{
             if(b%2 == 0){
                 return solution(PoweredMatrix(n, b/2, arr), PoweredMatrix(n, b/2, arr));
