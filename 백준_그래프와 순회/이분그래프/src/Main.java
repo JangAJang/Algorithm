@@ -1,38 +1,69 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayDeque;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
 
-    static BufferedReader br;
+    public static int[] team;
+    public static ArrayList<ArrayList<Integer>> graph;
+    public static int V,E;
+    public static String ans = "YES";
+    public static int A,B;
+    public static int RED = 1, GREEN = -1;
 
-    public static void main(String[] args)throws IOException{
-        br = new BufferedReader(new InputStreamReader(System.in));
-        int tasks = Integer.parseInt(br.readLine());
-        while(tasks-- >0){
-            checkBipartite();
+    public static void main(String[] args) throws Exception {
+        System.setIn(new FileInputStream("test.txt"));
+        Scanner sc = new Scanner(System.in);
+
+        int T = sc.nextInt();
+
+        for (int tc = 0; tc < T; tc++) {
+            ans = "YES";
+            V = sc.nextInt();
+            E = sc.nextInt();
+
+            graph = new ArrayList<>();
+
+            for (int i = 0; i < V; i++) {
+                graph.add(new ArrayList<>());
+            }
+            for (int i = 0; i < E; i++) {
+                A = sc.nextInt()-1;
+                B = sc.nextInt()-1;
+
+                graph.get(A).add(B);
+                graph.get(B).add(A);
+            }
+            team = new int[V];
+            for (int i = 0; i < V; i++) {
+                if(team[i] == 0) {
+                    if(!bfs(i)) break;
+                }
+            }
+
+            System.out.println(ans);
         }
     }
 
-    static void checkBipartite()throws IOException{
-        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-        int V = Integer.parseInt(st.nextToken());
-        int E = Integer.parseInt(st.nextToken());
-        Queue<Integer> edges[] = new Queue[V+1];
-        for(int i=1; i<=V; i++){
-            edges[i] = new ArrayDeque<>();
-        }
-        for(int i=0; i<E; i++){
-            st = new StringTokenizer(br.readLine(), " ");
-            int start = Integer.parseInt(st.nextToken());
-            int end = Integer.parseInt(st.nextToken());
-            edges[start].add(end);
-            edges[end].add(start);
+    private static boolean bfs(int n) {
+        Queue<Integer> q = new LinkedList<>();
 
+        q.add(n);
+        team[n] = RED;
+        while(!q.isEmpty()) {
+            int node = q.poll();
+
+            for(Integer i : graph.get(node)) {
+                if(team[node] == team[i]) {
+                    ans = "NO";
+                    return false;
+                }
+                if(team[i] == 0) {
+                    team[i] = team[node]*-1;
+                    q.add(i);
+                }
+            }
         }
 
+        return true;
     }
 }
