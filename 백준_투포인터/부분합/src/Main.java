@@ -10,27 +10,20 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
         int nums = Integer.parseInt(st.nextToken());
         int sum = Integer.parseInt(st.nextToken());
-        int[] arr = new int[nums];
+        int[] arr = new int[nums+1];
         st = new StringTokenizer(br.readLine(), " ");
         for(int i=0; i<nums; i++){
             arr[i] = Integer.parseInt(st.nextToken());
         }
-        Arrays.sort(arr);
-        int start = 0, end = 0, count = 0;
-        int total = arr[start];
-        while(start <= end && end < nums && start < nums){
-            if(total == sum) count++;
-            if(total >= sum){
-                total = total - arr[start];
-                start++;
-            }
-            else {
-                end++;
-                if(end < nums){
-                    total = total + arr[end];
-                }
-            }
+        int min = Integer.MAX_VALUE;
+        int start = 0, end = 0;
+        int total = 0;
+        while(start <= nums && end <= nums){
+            if(total >= sum && min > end - start) min = end - start;
+            if(total < sum) total += arr[end++];
+            else total -= arr[start++];
         }
-        System.out.println(count);
+        if(min == Integer.MAX_VALUE) System.out.println("0");
+        else System.out.println(min);
     }
 }

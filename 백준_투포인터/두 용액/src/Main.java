@@ -14,22 +14,18 @@ public class Main {
             arr[i] = Integer.parseInt(st.nextToken());
         }
         Arrays.sort(arr);
-        for(int i=0; i<N; i++){
-            System.out.println(arr[i]);
-        }
         int start = 0;
         int end = N-1;
         int min = Integer.MAX_VALUE;
         int x = 0, y = 0;
         while(start < end){
-            int sum = arr[start] + arr[end];
-            if(sum < min){
-                min = sum;
-                System.out.println(min);
+            int sum  = arr[start] + arr[end];
+            if(Math.abs(sum) < min){
+                min = Math.abs(sum);
                 x = start;
                 y = end;
             }
-            if(sum <= min){
+            if(sum<=0){
                 start++;
             }
             else end--;
