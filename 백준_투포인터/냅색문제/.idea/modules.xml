@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/NapSack.iml" filepath="$PROJECT_DIR$/NapSack.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Napsack.iml" filepath="$PROJECT_DIR$/Napsack.iml" />
     </modules>
   </component>
 </project>

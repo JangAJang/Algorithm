@@ -1,30 +1,57 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
+    static int c;
+    static int[] arr;
+    static List<Integer> left, right;
+    public static void main(String[] args) throws  IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-    public static int count = 0;
+        int n = Integer.parseInt(st.nextToken());
+        c = Integer.parseInt(st.nextToken());
 
-    public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
-        int C = sc.nextInt();
-        int[] arr = new int[N+1];
-        for(int i=0; i<N; i++){
-            arr[i] = sc.nextInt();
+        arr = new int[n];
+        st = new StringTokenizer(br.readLine());
+        for(int i=0; i<n; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
         }
-        for(int i=1; i<=C; i++){
-            TwoPoint(arr, i);
+
+        left = new ArrayList<>();
+        right = new ArrayList<>();
+        comb(left, 0, n/2, 0);
+        comb(right, n/2, n, 0);
+        right.sort((a,b) -> (a-b));
+
+        int cnt = 0;
+        int idx = 0;
+        for(int i=0; i<left.size(); i++) {
+            idx = upperbound(0, right.size()-1, left.get(i));
+            cnt += idx+1;
         }
-        System.out.println(count+1);
+        System.out.println(cnt);
     }
 
-    public static void TwoPoint(int[] arr, int sum){
-        int start = 0, end = 0;
-        int total = 0;
-        while(start <arr.length && end < arr.length){
-            if(total  == sum) count++;
-            if(total < sum) total += arr[end++];
-            else total -= arr[start++];
+    static int upperbound(int s, int e, int val) {
+        while(s <= e) {
+            int mid = (s+e)/2;
+            if(right.get(mid) <= c-val) {
+                s = mid+1;
+            }else {
+                e = mid-1;
+            }
         }
+        return e;
+    }
+
+    static void comb(List<Integer> list, int start, int end, int sum) {
+        if(sum > c) return;
+        if(start == end) {
+            list.add(sum);
+            return;
+        }
+        comb(list, start+1, end, sum);
+        comb(list, start+1, end, sum + arr[start]);
     }
 }
