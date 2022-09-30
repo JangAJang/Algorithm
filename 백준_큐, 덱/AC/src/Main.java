@@ -3,59 +3,59 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class Main {
+    public static void main(String[] args)throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        while(N-->0){
+            AC();
+        }
+    }
 
-    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-    static int OneCalculation()throws IOException{
+    public static void AC()throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String command = br.readLine();
-        int numbers = Integer.parseInt(br.readLine());
-        String sentence = br.readLine().replace("[", "").replace("]", "");
+        int length = Integer.parseInt(br.readLine());
         Deque<Integer> deque = new ArrayDeque<>();
-        StringTokenizer st = new StringTokenizer(sentence, ",");
-        for(int i=0; i<numbers; i++){
+        StringTokenizer st = new StringTokenizer(br.readLine(), "[],");
+        boolean reversed = false;
+        for(int i=0; i<length; i++){
             deque.add(Integer.parseInt(st.nextToken()));
         }
         for(int i=0; i<command.length(); i++){
-            if(command.charAt(i) == 'R'){
-                R(deque);
+            if(command.charAt(i)=='R'){
+                reversed = !reversed;
             }
             else if(command.charAt(i) == 'D'){
-                if(deque.isEmpty()){
+                if(deque.isEmpty()) {
                     System.out.println("error");
-                    return 0;
+                    return;
                 }
-                else{
-                    D(deque);
+                else {
+                    if(reversed) deque.removeLast();
+                    else deque.removeFirst();
                 }
             }
         }
-        System.out.println(deque.toString());
-        return 0;
-    }
-
-    static void R(Deque<Integer> deque){
-        Deque<Integer> tmp = new ArrayDeque<>();
-        int t = deque.size();
-        for(int i=0; i<t; i++){
-            tmp.add(deque.pollLast());
+        StringBuilder sb = new StringBuilder();
+        sb.append('[');
+        if(reversed){
+            sb.append(deque.pollLast());
+            while(!deque.isEmpty()){
+                sb.append(","+deque.pollLast());
+            }
         }
-        deque.clear();
-        for(int i=0; i<t; i++){
-            deque.add(tmp.pollFirst());
+        else{
+            sb.append(deque.pollFirst());
+            while(!deque.isEmpty()){
+                sb.append(","+deque.pollFirst());
+            }
         }
-    }
+        sb.append(']');
+        System.out.println(sb);
 
-    static void D(Deque<Integer> deque){
-        deque.removeFirst();
-    }
-
-    public static void main(String[] args)throws IOException {
-        int T = Integer.parseInt(br.readLine());
-        for(int i=0; i<T; i++){
-            OneCalculation();
-        }
     }
 }
