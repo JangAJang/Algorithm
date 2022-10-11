@@ -1,101 +1,60 @@
-import java.io.*;
-import java.util.Stack;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main {
 
-    public static int[][] list=new int[1002][2];
-    public static int event_num,line_num;
-    public static int[][] dp=new int[1002][1002];
+    public static int T;
+    public static int count;
+    public static int[][] dp = new int[1002][1002];
+    public static int[][] eventPosition = new int[1002][2];
 
-    public static void main(String[] args) throws IOException {
-
-        BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
-        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-
-        line_num=Integer.parseInt(br.readLine());
-        event_num=Integer.parseInt(br.readLine());
-
-
-        for(int x=1;x<=event_num;x++){
-            StringTokenizer st=new StringTokenizer(br.readLine());
-
-            list[x][0]=Integer.parseInt(st.nextToken());
-            list[x][1]=Integer.parseInt(st.nextToken());
-        }
-
-
-
-
-
-        bw.write(String.valueOf(police(1,0,0))+"\n");
-
-        int index_one=0;
-        int index_two=0;
-
-
-        for(int index=1;index<=event_num;index++){
-
-            int one_remain=distance(1,index_one,index);
-
-            if(dp[index_one][index_two]-one_remain==dp[index][index_two]){
-                index_one=index;
-                bw.write("1\n");
-            }else{
-                index_two=index;
-                bw.write("2\n");
-            }
-
-        }
-
-        bw.flush();
-        bw.close();
-        br.close();
-
-
-
+    public static void main(String[] args)throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+         T = Integer.parseInt(br.readLine());
+         count = Integer.parseInt(br.readLine());
+         for(int i=1; i<=count; i++){
+             StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+             eventPosition[i][0] = Integer.parseInt(st.nextToken());
+             eventPosition[i][1] = Integer.parseInt(st.nextToken());
+         }
+         StringBuilder sb = new StringBuilder();
+         sb.append(getResult(1, 0, 0)).append("\n");
+         int firstCar = 0, secondCar = 0;
+         for(int i=1; i<= count; i++){
+             int firstCarDistance = distance(1, firstCar, i);
+             if(dp[firstCar][secondCar] - firstCarDistance == dp[i][secondCar]){
+                 firstCar = i;
+                 sb.append(1).append("\n");
+             }
+             else{
+                 secondCar = i;
+                 sb.append(2).append("\n");
+             }
+         }
+        System.out.println(sb);
     }
 
-
-    public static int police(int index,int one,int two){
-        if(index>event_num)
-            return 0;
-
-
-
-        if(dp[one][two]!=0)
-            return dp[one][two];
-
-
-
-        int one_move=police(index+1,index,two)+distance(1,one,index);
-
-        int two_move=police(index+1,one,index)+distance(2,two,index);
-
-
-        dp[one][two]=Math.min(one_move,two_move);
-
-
-        return dp[one][two];
-
+    public static int getResult(int eventIdx, int firstCar, int secondCar){
+        if(eventIdx > count) return 0;
+        if(dp[firstCar][secondCar] != 0) return dp[firstCar][secondCar];
+        int firstCartMove = getResult(eventIdx+1, eventIdx, secondCar) + distance(1, firstCar, eventIdx);
+        int secondCarMove = getResult(eventIdx+1, firstCar, eventIdx) + distance(2, secondCar, eventIdx);
+        return dp[firstCar][secondCar] = Math.min(firstCartMove, secondCarMove);
     }
 
-    public static int distance(int sep,int start,int end){
+    public static int distance(int carNumber, int startIdx, int endIdx){
+        int[] startLocation = getStartLocation(carNumber, startIdx);
+        return Math.abs(startLocation[0] - eventPosition[endIdx][0]) + Math.abs(startLocation[1] - eventPosition[endIdx][1]);
+    }
 
-
-        int x_start=list[start][0],y_start=list[start][1],x_end=list[end][0],y_end=list[end][1];
-
-        if(start==0){
-            if(sep==1){
-                x_start=y_start=1;
-            }else{
-                x_start=y_start=line_num;
-            }
+    public static int[] getStartLocation(int carNumber, int index){
+        if(index == 0){
+            if(carNumber == 1) return new int[]{1, 1};
+            return new int[]{T, T};
         }
-
-        return Math.abs(x_start-x_end)+Math.abs(y_start-y_end);
-
-
+        return eventPosition[index];
 
     }
 }
