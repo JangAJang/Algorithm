@@ -1,45 +1,48 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayDeque;
+import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
-    static boolean[] check;
-    static Queue<Integer> cases;
-    static int least = Integer.MAX_VALUE;
-    static int sister;
 
-
-    public static void main(String[] args)throws IOException {
+    public static void main(String args[])throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-        check = new boolean[100001];
-        cases = new ArrayDeque<>();
         int subin = Integer.parseInt(st.nextToken());
-        sister = Integer.parseInt(st.nextToken());
-        cases.add(subin);
-        bfs(-1, subin);
-        System.out.println(least);
-    }
-
-    static void bfs(int count, int location){
-        check[location] = true;
-        if(location >= sister){
-            least = Math.min(count, least);
-            return;
-        }
-        else{
-            int[] arr = {location+1, location-1, location*2};
-            for(int i=0; i<3; i++){
-                if(arr[i] >=0 && arr[i] <= 100000){
-                    if(!check[arr[i]]){
-                        bfs(count+1, arr[i]);
-                    }
+        int brother = Integer.parseInt(st.nextToken());
+        int result = 100000;
+        boolean[] visited = new boolean[100001];
+        Queue<Place> queue = new LinkedList<>();
+        queue.add(new Place(subin, 0));
+        visited[subin] = true;
+        while(!queue.isEmpty()){
+            Place now = queue.poll();
+            if(now.location == brother) result = Math.min(result, now.count);
+            else{
+                int[] arr = new int[3];
+                arr[0] = now.location + 1;
+                arr[1] = now.location - 1;
+                arr[2] = now.location * 2;
+                for(int i=0; i<3; i++){
+                    if(arr[i] < 0 || arr[i] > 100000) continue;
+                    else if(visited[arr[i]]) continue;
+                    queue.add(new Place(arr[i], now.count+1));
+                    visited[arr[i]] = true;
                 }
             }
         }
-        check[location] = false;
+        System.out.println(result);
+    }
+
+    public static class Place{
+        int location;
+        int count;
+
+        public Place(int location, int count){
+            this.location = location;
+            this.count = count;
+        }
     }
 }
