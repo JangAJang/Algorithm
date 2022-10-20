@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Bipart.iml" filepath="$PROJECT_DIR$/Bipart.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Bipartite.iml" filepath="$PROJECT_DIR$/Bipartite.iml" />
     </modules>
   </component>
 </project>

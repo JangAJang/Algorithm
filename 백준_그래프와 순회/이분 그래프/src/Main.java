@@ -1,85 +1,61 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
-public class Main {
+public class Main{
 
     static BufferedReader br;
+    static int V, E;
+    static List<Integer>[] edges;
+    static int[] visit;
 
     public static void main(String[] args)throws IOException{
         br = new BufferedReader(new InputStreamReader(System.in));
-        int K  = Integer.parseInt(br.readLine());
-        while(K-->0){
-            CheckBipartite();
+        int N = Integer.parseInt(br.readLine());
+        while(N-->0){
+            solveProblem();
+            if(isThisBipartite()) System.out.println("YES");
+            else System.out.println("NO");
         }
     }
 
-    public static void CheckBipartite()throws IOException{
+    public static void solveProblem()throws IOException{
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-        int V = Integer.parseInt(st.nextToken());
-        int E = Integer.parseInt(st.nextToken());
-        Node[] nodes = new Node[V+1];
+        V = Integer.parseInt(st.nextToken());
+        E = Integer.parseInt(st.nextToken());
+        edges = new ArrayList[V+1];
+        visit = new int[V+1];
         for(int i=1; i<=V; i++){
-            nodes[i] = new Node();
+            edges[i] = new ArrayList<>();
         }
+        getGraph();
+    }
+
+    public static void getGraph()throws IOException{
         for(int i=0; i<E; i++){
-            st = new StringTokenizer(br.readLine(), " ");
-            int start= Integer.parseInt(st.nextToken());
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            int start = Integer.parseInt(st.nextToken());
             int end = Integer.parseInt(st.nextToken());
-            nodes[start].addLeaf(end);
-            nodes[end].addLeaf(start);
-            if(nodes[start].isRed()){
-                nodes[end].setBlack();
-            }
-            else{
-                nodes[end].setRed();
-            }
+            edges[start].add(end);
+            edges[end].add(start);
         }
-        for(int i=1; i<=V; i++){
-            for(int j=0; j<nodes[i].leaves.size(); j++){
-                int k = nodes[i].leaves.get(j);
-                if(nodes[i].red_black == nodes[k].red_black){
-                    System.out.println("NO");
-                    return;
+    }
+
+    public static boolean isThisBipartite(){
+        Queue<Integer> queue = new LinkedList<Integer>();
+        queue.add(1);
+        visit[1] = 1;
+        while(!queue.isEmpty()){
+            int now = queue.poll();
+            for(int i=0; i<edges[now].size(); i++){
+                if(visit[edges[now].get(i)] == 0){
+                    queue.add(edges[now].get(i));
+                    visit[edges[now].get(i)] = visit[now] * -1;
                 }
+                if(visit[now] == visit[edges[now].get(i)]) return false;
             }
         }
-        System.out.println("YES");
-    }
-
-    public static class Node{
-
-        Red_Black red_black;
-
-        List<Integer> leaves = new LinkedList<>();
-
-        public void addLeaf(int val){
-            leaves.add(val);
-        }
-
-        public boolean isEmpty(){
-            if (leaves.isEmpty()) return true;
-            else return false;
-        }
-
-        public boolean isRed(){
-            if(red_black==Red_Black.RED) return true;
-            else return false;
-        }
-
-        public void setBlack(){
-            red_black = Red_Black.BLACK;
-        }
-
-        public void setRed(){
-            red_black = Red_Black.RED;
-        }
-    }
-
-    public enum Red_Black{
-        RED, BLACK;
+        return true;
     }
 }
