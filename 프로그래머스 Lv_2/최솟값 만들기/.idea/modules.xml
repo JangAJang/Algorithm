@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AlrightParenthesis.iml" filepath="$PROJECT_DIR$/AlrightParenthesis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MakeMinimum.iml" filepath="$PROJECT_DIR$/MakeMinimum.iml" />
     </modules>
   </component>
 </project>
