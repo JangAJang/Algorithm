@@ -53,7 +53,6 @@ class Solution {
     private String deleteFirstPoint(String seq3){
         return seq3.substring(1);
     }
-
     private String deleteLastPoint(String seq3){
         return seq3.substring(0, seq3.length()-1);
     }
