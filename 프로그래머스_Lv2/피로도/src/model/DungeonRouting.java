@@ -13,8 +13,6 @@ public class DungeonRouting {
     private static final int USING_FATIGUE_LEVEL = 1;
 
     private final Routes routes = new Routes();
-
-
     List<Integer> answers = new ArrayList<>();
     boolean[] visit;
 
