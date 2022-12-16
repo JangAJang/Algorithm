@@ -22,7 +22,7 @@ public class GetDivision {
         }
 
         private void addDivision(int n, int index){
-            if(n%index == index){
+            if(n / index == index){
                 numbers.add(index);
                 return;
             }
