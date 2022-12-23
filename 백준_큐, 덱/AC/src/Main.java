@@ -1,61 +1,36 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Scanner;
-import java.util.StringTokenizer;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
-    public static void main(String[] args)throws IOException{
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
-        while(N-->0){
-            AC();
+
+    private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args)throws IOException {
+        int tasks = Integer.parseInt(br.readLine());
+        while(tasks-- > 0){
+            try{
+                checkEachProcess();
+            }catch (Exception e){
+                System.out.println("error");
+            }
         }
     }
 
-    public static void AC()throws IOException{
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private static void checkEachProcess()throws IOException {
         String command = br.readLine();
-        int length = Integer.parseInt(br.readLine());
-        Deque<Integer> deque = new ArrayDeque<>();
-        StringTokenizer st = new StringTokenizer(br.readLine(), "[],");
-        boolean reversed = false;
-        for(int i=0; i<length; i++){
-            deque.add(Integer.parseInt(st.nextToken()));
+        int number = Integer.parseInt(br.readLine());
+        List<Integer> numberArray = Arrays.stream(br.readLine().replace("[", "").replace("]", "")
+                .split(",")).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
+        for(int index = 0; index < command.length(); index++){
+            changeWithCommand(command.charAt(index), numberArray);
         }
-        for(int i=0; i<command.length(); i++){
-            if(command.charAt(i)=='R'){
-                reversed = !reversed;
-            }
-            else if(command.charAt(i) == 'D'){
-                if(deque.isEmpty()) {
-                    System.out.println("error");
-                    return;
-                }
-                else {
-                    if(reversed) deque.removeLast();
-                    else deque.removeFirst();
-                }
-            }
-        }
-        StringBuilder sb = new StringBuilder();
-        sb.append('[');
-        if(reversed){
-            sb.append(deque.pollLast());
-            while(!deque.isEmpty()){
-                sb.append(","+deque.pollLast());
-            }
-        }
-        else{
-            sb.append(deque.pollFirst());
-            while(!deque.isEmpty()){
-                sb.append(","+deque.pollFirst());
-            }
-        }
-        sb.append(']');
-        System.out.println(sb);
+        System.out.println(numberArray.toString());
+    }
 
+    private static void changeWithCommand(char commandEach, List<Integer> numberArray){
+        if(commandEach == 'R') Collections.reverse(numberArray);
+        if(commandEach == 'D') numberArray.remove(0);
     }
 }
