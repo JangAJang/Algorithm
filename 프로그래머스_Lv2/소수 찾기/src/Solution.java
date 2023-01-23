@@ -1,53 +1,40 @@
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Stack;
 
 class Solution {
 
-    private final Set<Integer> cases = new HashSet<>();
+    private final Set<Integer> primes = new HashSet<>();
     private boolean[] visited;
 
     public int solution(String numbers) {
         visited = new boolean[numbers.length()];
-        for(int index = 1; index <= numbers.length(); index++){
-            dfs(numbers.substring(index-1).split(""), "", 0);
-        }
-        List<Integer> primes = getPrimesUntil(cases.stream().sorted().collect(Collectors.toUnmodifiableList()).get(cases.size()-1));
-        int count = 0;
-        for(int each: cases){
-            if(primes.contains(each)) {
-                System.out.println(each);
-                count++;
-            }
-        }
-        return count;
+        addPrimes(numbers, "");
+        System.out.println(primes.toString());
+        return primes.size();
     }
 
-    private void dfs(String[] split, String value, int count){
-        if(count == split.length) {
-            cases.add(Integer.parseInt(value));
-            return;
-        }
-        for(int index = 0; index < split.length; index++){
+    private void addPrimes(String numbers, String madeNumber){
+        for(int index = 0; index < numbers.length(); index++){
             if(!visited[index]){
                 visited[index] = true;
-                dfs(split, value+split[index], count+1);
+                addIfPrime(madeNumber + numbers.charAt(index));
+                addPrimes(numbers, madeNumber + numbers.charAt(index));
                 visited[index] = false;
             }
         }
     }
 
-    private List<Integer> getPrimesUntil(int value){
-        List<Integer> numbers = new ArrayList<>();
-        for(int index = 2; index <=value; index++){
-            if(isPrime(index)) numbers.add(index);
+    private void addIfPrime(String madeNumber){
+        int value = Integer.parseInt(madeNumber);
+        if(value == 0 || value == 1) return;
+        if(value == 2 || value == 3) {
+            primes.add(value);
+            return;
         }
-        return numbers;
-    }
-
-    private boolean isPrime(int number){
-        for(int index = 2; index <= Math.sqrt(number); index++){
-            if(number % index == 0) return false;
+        for(int index = 2; index <= Math.sqrt(value); index++){
+            if(value % index == 0) return;
         }
-        return true;
+        primes.add(value);
     }
 }
