@@ -3,7 +3,7 @@ import java.util.*;
 public class Solution {
 
     public int solution(int v, int[][] edges){
-        PriorityQueue<Edge> queue = new PriorityQueue<>((o1, o2)->o1.getDist() - o2.getDist());
+        PriorityQueue<Edge> queue = new PriorityQueue<>(Comparator.comparingInt(Edge::getDist));
         HashMap<Integer, HashMap<Integer, Integer>> map = new HashMap<>();
         boolean[] visited = new boolean[v+1];
         for(int index = 1; index <=v;index++){
