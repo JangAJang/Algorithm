@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/closest_alphabet.iml" filepath="$PROJECT_DIR$/closest_alphabet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/close_same_letter.iml" filepath="$PROJECT_DIR$/close_same_letter.iml" />
     </modules>
   </component>
 </project>

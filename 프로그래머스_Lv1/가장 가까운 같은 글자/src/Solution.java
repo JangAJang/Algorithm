@@ -1,17 +1,21 @@
-import java.util.Arrays;
+import java.util.*;
 
 class Solution {
     public int[] solution(String s) {
         int[] answer = new int[s.length()];
-        Arrays.fill(answer, -1);
-        for(int index = 0; index < answer.length-1; index++){
-            answer[index] = getIndexOfChar(s, index);
+        Map<Character, Integer> indexMap = new HashMap<>();
+        Map<Character, Integer> distanceMap = new HashMap<>();
+        for (int i = 0; i<s.length(); i++) {
+            if (!indexMap.containsKey(s.charAt(i))) {
+                indexMap.put(s.charAt(i), i);
+                distanceMap.put(s.charAt(i), -1);
+                answer[i] = -1;
+                continue;
+            }
+            distanceMap.put(s.charAt(i), i - indexMap.get(s.charAt(i)));
+            indexMap.put(s.charAt(i), i);
+            answer[i] = distanceMap.get(s.charAt(i));
         }
         return answer;
-    }
-
-    private int getIndexOfChar(String s, int index){
-        if(!s.contains(Character.toString(s.charAt(index)))) return -1;
-        return s.substring(index+1).indexOf(s.charAt(index)) - index;
     }
 }
