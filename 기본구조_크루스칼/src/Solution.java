@@ -11,7 +11,10 @@ public class Solution {
         parent = new int[n+1];
         IntStream.range(1, n+1).forEach(i-> parent[i] = i);
         for(int[] edge : edges){
-            
+            if(getParent(edge[0]) == getParent(edge[1]))
+                continue;
+            total += edge[2];
+            union(edge[0], edge[1]);
         }
     }
 
