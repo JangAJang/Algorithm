@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.*;
 import java.util.stream.*;
 
@@ -15,6 +16,8 @@ public class Solution {
                 continue;
             total += edge[2];
             union(edge[0], edge[1]);
+            BigInteger big = BigInteger.valueOf(10);
+            big.intValue()
         }
     }
 
