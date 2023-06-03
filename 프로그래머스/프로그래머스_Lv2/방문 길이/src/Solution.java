@@ -1,75 +1,33 @@
-import java.util.ArrayList;
-import java.util.List;
-
 class Solution {
+
+    private boolean[][] visited;
     public int solution(String dirs) {
-        List<Movement> movements = new ArrayList<>();
-        Point lastPoint = new Point(0, 0);
-        for(int index = 0; index < dirs.length(); index++){
-            Point newPoint = lastPoint.move(dirs.charAt(index));
-            movements.add(new Movement(lastPoint, newPoint));
-            lastPoint = newPoint;
-        }
-        return countDifferentMovement(movements);
+        visited = new boolean[11][11];
+        int[] start = new int[]{5, 5};
+        return getMovingDistance(start, dirs, 0);
     }
 
-    private int countDifferentMovement(List<Movement> movements){
-        int count = 0;
-        for(int index = 0; index < movements.size(); index++){
-            if(isDifferentOne(index, movements)) count++;
+    private int getMovingDistance(int[] start, String dirs, int count) {
+        if(dirs.equals("")) return count;
+        int[] next = move(start, dirs.charAt(0));
+        if ((visited[next[0]][next[1]] && visited[start[0]][start[1]])
+                || (next[0] == start[0] && next[1] == start[1])) {
+            return getMovingDistance(next, dirs.substring(1), count);
         }
-        return count;
+        visited[start[0]][start[1]] = true;
+        return getMovingDistance(next, dirs.substring(1), count+1);
     }
 
-    private boolean isDifferentOne(int index, List<Movement> movements){
-        Movement movement = movements.get(index);
-        for(int checker = index+1; checker < movements.size(); checker++){
-            if(movement.isSame(movements.get(checker))) return false;
+    private int[] move(int[] loc, char command) {
+        if( command == 'U') {
+            return new int[]{loc[0], Math.min(10, loc[1]+1)};
         }
-        return true;
-    }
-
-    private class Point{
-
-        private static final int MAX_VALUE = 5;
-        private static final int MIN_VALUE = -5;
-
-        int x;
-        int y;
-
-        public Point(int x, int y){
-            this.x = x;
-            this.y = y;
+        if( command == 'D') {
+            return new int[]{loc[0], Math.max(0, loc[1]-1)};
         }
-
-        public Point move(char c){
-            if(c=='U') return new Point(x, Math.min(MAX_VALUE, y+1));
-            if(c=='D') return new Point(x, Math.max(MIN_VALUE, y-1));
-            if(c=='R') return new Point(Math.min(MAX_VALUE, x+1), y);
-            return new Point(Math.max(MIN_VALUE, x-1), y);
+        if( command == 'L') {
+            return new int[]{Math.max(0, loc[0]-1), loc[1]};
         }
-    }
-
-    private class Movement{
-        Point from;
-        Point to;
-
-        public Movement(Point from, Point to){
-            this.from = from;
-            this.to = to;
-        }
-
-        public boolean isSame(Movement movement){
-            return (this.from.equals(movement.getFrom()) && this.to.equals(movement.getTo()))
-                    || (this.from.equals(movement.getTo()) && this.to.equals(movement.getFrom()));
-        }
-
-        public Point getFrom() {
-            return from;
-        }
-
-        public Point getTo() {
-            return to;
-        }
+        return new int[]{Math.min(10, loc[0]+1), loc[1]};
     }
 }

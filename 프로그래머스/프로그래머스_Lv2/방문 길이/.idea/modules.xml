@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/visited-length.iml" filepath="$PROJECT_DIR$/visited-length.iml" />
+      <module fileurl="file://$PROJECT_DIR$/visited_length.iml" filepath="$PROJECT_DIR$/visited_length.iml" />
     </modules>
   </component>
 </project>
