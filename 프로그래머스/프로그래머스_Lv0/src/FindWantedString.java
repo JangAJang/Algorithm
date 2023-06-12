@@ -1,0 +1,8 @@
+public class FindWantedString {
+    class Solution {
+        public int solution(String myString, String pat) {
+            if(myString.toLowerCase().contains(pat.toLowerCase())) return 1;
+            return 0;
+        }
+    }
+}
