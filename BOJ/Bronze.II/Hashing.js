@@ -23,10 +23,11 @@ rl.on("close", () => {
 
 const hashFunc = () => {
   const alphabets = input[1];
-  let result = 0;
+  let result = BigInt(0);
   alphabets.split("").forEach((each, index) => {
-    result +=
-      Math.pow(31, index) * (each.charCodeAt(0) - "a".charCodeAt(0) + 1);
+    result += BigInt(
+      31 ** index * (each.charCodeAt(0) - "a".charCodeAt(0) + 1)
+    );
   });
-  return result;
+  return String(result).replace("n", "");
 };
