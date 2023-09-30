@@ -21,6 +21,14 @@ rl.on("close", () => {
 
 const calculateScore = () => {
   const length = Number(input[0]);
-  const values = input.slice(1);
-  console.log(values);
+  const start = Math.round(length * 0.15);
+  const end = length - start;
+  const values = input
+    .slice(1)
+    .map(Number)
+    .sort((a, b) => a - b)
+    .slice(start, end);
+  const average =
+    values.reduce((sum, current) => sum + current, 0) / values.length;
+  console.log(Math.floor(average));
 };
