@@ -1,16 +1,28 @@
 function solution(maps) {
-  var answer = 0;
-  return answer;
+  const visited = [];
+  let start;
+  for (let x = 0; x < maps.length; x++) {
+    maps[x] = maps[x].split("");
+    const temp = [];
+    for (let y = 0; y < maps[x].length; y++) {
+      if (maps[x][y] === "S") {
+        start = [x, y];
+        temp.push(true);
+        continue;
+      }
+      temp.push(false);
+    }
+    visited.push(temp);
+  }
 }
 
 function BFS(graph, start, visited) {
   const queue = new Queue();
   queue.push(start);
-  visited[start] = true;
+  visited[start[0]][start[1]] = true;
 
   while (queue.size()) {
     const v = queue.popleft();
-    console.log(v);
 
     for (const node of graph[v]) {
       if (!visited[node]) {
