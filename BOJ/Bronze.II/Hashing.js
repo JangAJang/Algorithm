@@ -8,38 +8,27 @@ const [N, string] = require("fs")
 
 let sum = 0n;
 
-const alphabet = {
-  a: 1n,
-  b: 2n,
-  c: 3n,
-  d: 4n,
-  e: 5n,
-  f: 6n,
-  g: 7n,
-  h: 8n,
-  i: 9n,
-  j: 10n,
-  k: 11n,
-  l: 12n,
-  m: 13n,
-  n: 14n,
-  o: 15n,
-  p: 16n,
-  q: 17n,
-  r: 18n,
-  s: 19n,
-  t: 20n,
-  u: 21n,
-  v: 22n,
-  w: 23n,
-  x: 24n,
-  y: 25n,
-  z: 26n,
+const alphabet = (char) => {
+  {
+    if (!/^[a-zA-Z]$/.test(char)) {
+      throw new Error(
+        "Invalid input. Please provide a single alphabet character."
+      );
+    }
+
+    // 알파벳을 소문자로 변환하여 ASCII 코드로 매핑
+    const asciiCode = char.toLowerCase().charCodeAt(0);
+
+    // 'a'의 ASCII 코드 값은 97이므로, 이를 기준으로 변환
+    const result = BigInt(asciiCode - "a".charCodeAt(0) + 1);
+
+    return result;
+  }
 };
 
 string.forEach((el, idx) => {
   idx = BigInt(idx);
-  sum += alphabet[el] * 31n ** idx;
+  sum += alphabet(el) * 31n ** idx;
 });
 
 console.log(String(sum % 1234567891n));
