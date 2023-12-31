@@ -1,5 +1,11 @@
 // 11727. 2xn타일링 2
 
+const arr = require("fs")
+  .readFileSync("/dev/stdin")
+  .toString()
+  .split("\n")
+  .map((v) => v.trim());
+
 const array = [0, 1, 3];
 
 const solution = (n) => {
@@ -13,4 +19,4 @@ const f = (n) => {
   return array[n];
 };
 
-console.log(solution(12));
+console.log(solution(Number(arr[0])));
