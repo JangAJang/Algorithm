@@ -1,48 +1,68 @@
-const xNext = [-1, 0, 1, 0];
-const yNext = [0, -1, 0, 1];
+const dx = [-1, 0, 1, 0];
+const dy = [0, -1, 0, 1];
 const MAX = Number.MAX_SAFE_INTEGER;
 
 const solution = (board) => {
-  const map = [];
-  const start = [];
-  const end = [];
-  for (let x = 0; x < board.length; x++) {
-    const arr = board[x].split("");
-    for (let y = 0; y < board[x].length; y++) {
-      if (arr[y] === "G") {
-        end.push(x);
-        end.push(y);
-        continue;
-      }
+  var answer = 0;
+  board = board.map((items) => items.split(""));
 
-      if (arr[y] === "R") {
-        start.push(x);
-        start.push(y);
+  const q = [];
+  const n = board.length; // 가로 길이
+  const m = board[0].length; // 세로 길이
+
+  board.forEach((items, i) => {
+    items.forEach((item, j) => {
+      if (item === "R") q.push([i, j]); // 시작 위치
+    });
+  });
+
+  // 1) 시작 위치를 다시 방문하지 않게 'O' 표시
+  board[q[0][0]][q[0][1]] = "O";
+
+  // 2) q의 길이 만큼 반복
+  while (q.length) {
+    // 3) 횟수(answer)를 카운트하기 위해 현재 q의 길이를 고정시킨다.
+    const size = q.length;
+
+    // 4) 고정시킨 길이만큼 반복한다.
+    for (let i = 0; i < size; i++) {
+      const [x, y] = q.shift();
+
+      // 5) 상하좌우 한번씩 확인
+      for (let j = 0; j < 4; j++) {
+        // 6) 다음 이동 위치
+        let nx = x + dx[j];
+        let ny = y + dy[j];
+
+        // 7) 게임판 범위와 벽(D)를 만나지 않을 경우만 미끄러진다.
+        while (
+          nx >= 0 &&
+          nx < n &&
+          ny >= 0 &&
+          ny < m &&
+          board[nx][ny] !== "D"
+        ) {
+          nx += dx[j];
+          ny += dy[j];
+        }
+
+        // 8) 현재 위치로 변경한다.
+        nx -= dx[j];
+        ny -= dy[j];
+
+        // 9) 현재 위치가 도착(G) 지점이면 횟수(answer)를 1증가 후 반환한다.
+        if (board[nx][ny] === "G") return answer + 1;
+
+        // 10) 한번이라도 방문한적이 없을 경우만
+        if (board[nx][ny] !== "O") {
+          // 11) 방문 표시(O) 후 q에 담는다.
+          board[nx][ny] = "O";
+          q.push([nx, ny]);
+        }
       }
     }
-    map.push(arr);
+    answer++;
   }
-  const visited = new Array(map.length).fill(
-    new Array(map[0].length).fill(false)
-  );
-  let total = new Array(map.length).fill(new Array(map[0].length).fill(MAX));
-  const queue = [];
-  queue.push(start);
-  total[start[0]][start[1]] = 0;
-  while (queue.length != 0) {
-    const current = queue.shift();
-    if (visited[current[0]][current[1]]) continue;
-    console.log(current);
-    visited[current[0]][current[1]] = true;
-    for (let index = 0; index < 4; index++) {
-      const x = xNext[index] + start[0];
-      const y = yNext[index] + start[1];
-      if (x < 0 || x >= visited.length || y < 0 || y >= visited[0].length)
-        continue;
-      if (visited[x][y]) continue;
-      total[x][y] = Math.min(total[x][y], total[current[0]][current[1]] + 1);
-      queue.push([x, y]);
-    }
-  }
-  return total[end[0]][end[1]];
+
+  return -1;
 };
