@@ -1,3 +1,5 @@
+// 미로 탈출
+
 const X_DIRECT = [-1, 0, 1, 0];
 const Y_DIRECT = [0, -1, 0, 1];
 
