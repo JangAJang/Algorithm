@@ -3,11 +3,14 @@ function solution(numbers) {
 }
 
 const findLeastAnswer = (number) => {
-  let value = number + 1;
+  let value = 0;
   const binaryValue = number.toString(2);
   while (true) {
-    const padded = padBinaryStrings(binaryValue, value.toString(2));
-    if (differMoreThanTwo(padded)) return value;
+    const padded = padBinaryStrings(
+      binaryValue,
+      (number + Math.pow(2, value)).toString(2)
+    );
+    if (differMoreThanTwo(padded)) return number + Math.pow(2, value);
     value++;
   }
 };
