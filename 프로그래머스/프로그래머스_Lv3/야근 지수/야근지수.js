@@ -1,16 +1,19 @@
 function solution(n, works) {
-  works.sort((a, b) => {
-    return b - a;
-  });
+  if (works.reduce((a, b) => a + b) <= n) return 0;
 
-  for (let index = 0; index < n; index++) {
-    let work = works.shift();
-    if (work === 0) return 0;
+  let sorted = works.sort((a, b) => b - a);
 
-    works.unshift(work - 1);
-    works.sort((a, b) => b - a);
+  while (n) {
+    const max = sorted[0];
+
+    for (let i = 0; i < works.length; i--) {
+      if (sorted[i] >= max) {
+        sorted[i]--;
+        n--;
+      }
+      if (!n) break;
+    }
   }
-  return works
-    .map((each) => each * each)
-    .reduce((acc, current) => acc + current, 0);
+
+  return sorted.reduce((a, b) => a + Math.pow(b, 2), 0);
 }
