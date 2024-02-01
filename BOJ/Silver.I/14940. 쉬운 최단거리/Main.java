@@ -21,7 +21,6 @@ public class Main {
                     result[xIndex][yIndex] = 0;
                     queue.add(new int[]{xIndex, yIndex});
                     map[xIndex][yIndex] = 2;
-                    visited[xIndex][yIndex] = true;
                     continue;
                 }
                 result[xIndex][yIndex] = Long.MAX_VALUE;
@@ -29,6 +28,11 @@ public class Main {
                 continue;
             }
         }
-
+        while(!queue.isEmpty()) {
+            int[] current = queue.poll();
+            if(visited[current[0]][current[1]]) continue;
+            visited[current[0]][current[1]] = true;
+            
+        }
     }
 }
