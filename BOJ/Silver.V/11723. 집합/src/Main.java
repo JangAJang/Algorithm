@@ -1,72 +1,78 @@
-import java.io.*;
-import java.util.*;
-import java.util.stream.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
 
-    private static int x;
+    private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    public static void main(String[] args) throws IOException{
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private static final boolean[] arr = new boolean[21];
+
+    public static void main(String[] args) throws IOException {
         int count = Integer.parseInt(br.readLine());
-        x = 0;
-        while(count-- > 0){
+        while(count-- > 0) {
             String command = br.readLine();
-            if(command.equals("all")){
-                addAll();
+            if (command.equals("all")) {
+                setAll();
                 continue;
             }
-            if(command.equals("empty")){
-                empty();
+
+            if (command.equals("empty")) {
+                setEmpty();
+            }
+
+            String[] commandAndNumber = command.split(" ");
+            int value = Integer.parseInt(commandAndNumber[1]);
+            command = commandAndNumber[0];
+            if(command.equals("add")) {
+                add(value);
                 continue;
             }
-            String order = command.split(" ")[0];
-            int number = Integer.parseInt(command.split(" ")[1]);
-            if(order.equals("add")){
-                addValue(number);
+
+            if(command.equals("remove")) {
+                remove(value);
                 continue;
             }
-            if(order.equals("remove")){
-                removeValue(number);
+
+            if(command.equals("check")) {
+                check(value);
                 continue;
             }
-            if(order.equals("toggle")){
-                toggleValue(number);
-                continue;
+
+            if(command.equals("toggle")) {
+                toggle(value);
             }
-            if(order.equals("check")){
-                checkValue(number);
-            }
+
+
+        }
+
+    }
+
+    private static void setAll() {
+        for(int count = 1; count <= 20; count++) {
+            arr[count] = true;
         }
     }
 
-    private static void empty(){
-        x = 0;
-    }
-
-    private static void addAll(){
-        for(int index = 1; index <= 20; index++){
-            addValue(index);
+    private static void setEmpty() {
+        for(int count = 1; count <= 20; count++) {
+            arr[count] = false;
         }
     }
 
-    private static void addValue(int number){
-        x |= (1<<number);
+    private static void add(final int value) {
+        arr[value] = true;
     }
 
-    private static void removeValue(int number){
-        x = x & ~(1<<number);
+    private static void remove(final int value) {
+        arr[value] = false;
     }
 
-    private static void toggleValue(int number){
-        x = x ^ (1<<number);
+    private static void check(final int value) {
+        System.out.println(arr[value] ? 1 : 0);
     }
 
-    private static void checkValue(int number){
-        if(Integer.toBinaryString(x).charAt(number-1) == '1') {
-            System.out.println(1);
-            return;
-        }
-        System.out.println(0);
+    private static void toggle(final int value) {
+        arr[value] = !arr[value];
     }
 }
