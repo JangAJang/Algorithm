@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/group.iml" filepath="$PROJECT_DIR$/group.iml" />
+      <module fileurl="file://$PROJECT_DIR$/array.iml" filepath="$PROJECT_DIR$/array.iml" />
     </modules>
   </component>
 </project>
