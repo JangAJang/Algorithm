@@ -19,18 +19,14 @@ function solution(land) {
 
 function calculateAccumulated(land, x, y) {
   const stack = [];
-  const visited = Array.from({ length: land.length }, () =>
-    Array(land[0].length).fill(false)
-  );
-  stack.push([x, y]);
   const yAreas = new Set();
+  stack.push([x, y]);
   yAreas.add(y);
   let total = 0;
   while (stack.length !== 0) {
     const [sourceX, sourceY] = stack.pop();
-    if (visited[sourceX][sourceY]) continue;
-    visited[sourceX][sourceY] = true;
-    land[sourceX][sourceY] = 0;
+    if (land[sourceX][sourceY] === 0) continue; // 이미 방문한 지점은 스킵
+    land[sourceX][sourceY] = 0; // 방문한 지점 표시
     total++;
     for (let index = 0; index < 4; index++) {
       const nextX = sourceX + xMove[index];
@@ -42,7 +38,6 @@ function calculateAccumulated(land, x, y) {
         nextY >= land[0].length
       )
         continue;
-      if (visited[nextX][nextY]) continue;
       if (land[nextX][nextY] == 0) continue;
       stack.push([nextX, nextY]);
       yAreas.add(nextY);
