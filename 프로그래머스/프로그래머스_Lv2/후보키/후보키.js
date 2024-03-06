@@ -1,5 +1,4 @@
 let count = 0;
-
 function solution(relation) {
   let combinations = [];
   for (let index = 0; index < relation[0].length; index++) {
