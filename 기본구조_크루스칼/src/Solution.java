@@ -8,7 +8,7 @@ public class Solution {
     private int total = 0;
 
     public void solution(int n, int[][] edges){
-        Arrays.sort(edges, Comparator.comparingInt(o1-> o1[2]));
+        Arrays.sort(edges, Comparator.<int[]>comparingInt(o1 -> o1[2]));
         parent = new int[n+1];
         IntStream.range(1, n+1).forEach(i-> parent[i] = i);
         for(int[] edge : edges){
@@ -17,7 +17,6 @@ public class Solution {
             total += edge[2];
             union(edge[0], edge[1]);
             BigInteger big = BigInteger.valueOf(10);
-            big.intValue()
         }
     }
 
