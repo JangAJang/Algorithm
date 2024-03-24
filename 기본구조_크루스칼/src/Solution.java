@@ -16,7 +16,6 @@ public class Solution {
                 continue;
             total += edge[2];
             union(edge[0], edge[1]);
-            BigInteger big = BigInteger.valueOf(10);
         }
     }
 
