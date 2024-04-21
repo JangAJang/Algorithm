@@ -4,29 +4,46 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main {
+
+    private static final StringBuilder sb = new StringBuilder();
+    private static StringTokenizer st;
+    private static int S;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
-        int S = 0;
+        S = 0;
         int M = Integer.parseInt(br.readLine());
-        StringTokenizer st;
         while (M-- > 0) {
             st = new StringTokenizer(br.readLine());
             String str = st.nextToken();
-            if(str.equals("all")) S = (1 << 21) - 1;
-            else if(str.equals("empty")) S = 0;
-            else {
-                int num = Integer.parseInt(st.nextToken());
-                if(str.equals("add"))
-                    S |= (1 << num);
-                else if(str.equals("remove"))
-                    S &= ~(1 << num);
-                else if(str.equals("check"))
-                    sb.append((S & (1 << num)) != 0 ? 1 : 0).append("\n");
-                else if(str.equals("toggle"))
-                    S ^= (1 << num);
-            }
+            parseCommand(str);
         }
         System.out.println(sb);
+    }
+
+    private static void parseCommand(final String str) {
+        if(str.equals("all")){
+            S = (1 << 21) - 1;
+            return;
+        }
+        if(str.equals("empty")) {
+            S = 0;
+            return;
+        }
+        int num = Integer.parseInt(st.nextToken());
+        if(str.equals("add")){
+            S |= (1 << num);
+            return;
+        }
+        if(str.equals("remove")) {
+            S &= ~(1 << num);
+            return;
+        }
+
+        if(str.equals("check")) {
+            sb.append((S & (1 << num)) != 0 ? 1 : 0).append("\n");
+            return;
+        }
+        S ^= (1 << num);
     }
 }
