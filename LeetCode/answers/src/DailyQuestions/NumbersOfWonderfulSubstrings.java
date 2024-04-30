@@ -18,7 +18,7 @@ public class NumbersOfWonderfulSubstrings {
                 int diff = bitmask ^ (1 << i);
                 result += count.getOrDefault(diff, 0);
             }
-            
+
             count.put(bitmask, count.getOrDefault(bitmask, 0) + 1);
         }
 
