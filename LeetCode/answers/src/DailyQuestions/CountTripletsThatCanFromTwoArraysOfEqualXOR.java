@@ -33,4 +33,7 @@ public class CountTripletsThatCanFromTwoArraysOfEqualXOR {
 // 첫 번째꺼만 XOR 하면 0 ^ (i+1)이다.
 // 즉, j는 셀 필요 없다. i, k의 배열 전체 길이 - 1해주면 된다.
 // Example1을 보면 이해가 될 것이다. 0~2가 i, k일 때 j는 1, 2가 가능하다. (전체 길이 3 - 1)
-// 그냥 k-i값만큼 누적시켜주면 된다. 
+// 그냥 k-i값만큼 누적시켜주면 된다.
+
+XOR(from + 1 , to) ^ (from+1) = from ^ (from+1)
+XOR(from + 2, to) = XOR(from, from+1)
