@@ -3,7 +3,7 @@ package DailyQuestions;
 import java.util.*;
 
 public class SubarraysSumsDivisibleByK {
-    
+
     public int subarraysDivByK(int[] nums, int k) {
         Tree segmentTree = Tree.createSegment(nums, 0, nums.length - 1);
         int count = countSubarraysDivisibleByK(nums, k, segmentTree);
