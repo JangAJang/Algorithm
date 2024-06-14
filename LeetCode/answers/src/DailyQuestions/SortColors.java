@@ -1,5 +1,7 @@
 package DailyQuestions;
 
+import java.util.*;
+
 public class SortColors {
 
     public void sortColors(int[] nums) {
