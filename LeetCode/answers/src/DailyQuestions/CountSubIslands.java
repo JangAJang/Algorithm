@@ -17,6 +17,7 @@ public class CountSubIslands {
             isSubIsland = false;
         }
 
+        // Mark the current cell as visited by setting grid2[i][j] to 0
         grid2[i][j] = 0;
 
         // Continue the DFS in all four directions
