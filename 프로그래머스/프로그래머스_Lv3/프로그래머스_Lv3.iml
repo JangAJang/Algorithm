@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/[카카오 인턴] 경주로 건설" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/디스크 컨트롤러" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/야근 지수" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/이중 우선순위 큐" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/최고의 집합" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
