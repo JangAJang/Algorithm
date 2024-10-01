@@ -11,6 +11,7 @@ public class DES {
     private static Cipher c;
     private static String KSP = "64bitkey";
     private static DESKeySpec desKeySpec;
+    private static AESKeySpec aesKeySpec;
     private static SecretKeyFactory keyFactory;
     private static Key key;
 
