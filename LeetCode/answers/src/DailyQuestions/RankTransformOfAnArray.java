@@ -3,25 +3,18 @@ package DailyQuestions;
 public class RankTransformOfAnArray {
 
     public int[] arrayRankTransform(int[] arr) {
-        final Set<Integer> set = new HashSet<>();
+        final int[] answer = arr.clone();
+        Arrays.sort(arr);
+        final Map<Integer, Integer> map = new HashMap<>();
         for(int each : arr) {
-            set.add(each);
+            if(map.containsKey(each)) continue;
+            map.put(each, map.keySet().size()+1);
         }
 
-        final List<Integer> list = new ArrayList<>(set);
-        Collections.sort(list);
         for(int index = 0; index < arr.length; index++) {
-            arr[index] = getRankOf(arr[index], list);
+            answer[index] = map.get(answer[index]);
         }
 
-        return arr;
-    }
-
-    private int getRankOf(final int value, final List<Integer> list) {
-        for(int index = 0; index < list.size(); index++) {
-            if(value == list.get(index)) return index+1;
-        }
-
-        return -1;
+        return answer;
     }
 }
