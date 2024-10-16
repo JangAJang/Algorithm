@@ -13,13 +13,11 @@ public class LongestHappyString {
         while (!pq.isEmpty()) {
             int[] first = pq.poll();
 
-            // Check if last two characters are the same.
             if (result.length() >= 2 && result.charAt(result.length() - 1) == first[1] &&
                 result.charAt(result.length() - 2) == first[1]) {
 
-                if (pq.isEmpty()) break;  // No more valid characters.
+                if (pq.isEmpty()) break;
 
-                // Pick the second character.
                 int[] second = pq.poll();
                 result.append((char) second[1]);
                 second[0]--;
