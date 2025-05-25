@@ -1,6 +1,6 @@
-package DailyQuestions;
+import java.util.*;
 
-public class AppendCharactersToStringToMakeSubsequence {
+class  AppendCharactersToStringToMakeSubsequence {
 
     public int appendCharacters(String s, String t) {
         int tIndex = 0;

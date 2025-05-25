@@ -1,6 +1,6 @@
-package DailyQuestions;
+import java.util.*;
 
-public class AddingSpacesToAString {
+class AddingSpacesToAString {
 
 	public String addSpaces(String s, int[] spaces) {
 		StringBuilder sb=new StringBuilder();

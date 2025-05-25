@@ -1,6 +1,6 @@
-package DailyQuestions;
+import java.util.*;
 
-public class AllOneDataStructure {
+class  AllOneDataStructure {
 
     class AllOne {
         private Map<String, Integer> count;

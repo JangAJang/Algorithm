@@ -1,3 +1,5 @@
+import java.util.*;
+
 class Solution {
     public int minimumIndex(List<Integer> nums) { // Accept List<Integer>
         HashMap<Integer, Integer> mp1 = new HashMap<>();

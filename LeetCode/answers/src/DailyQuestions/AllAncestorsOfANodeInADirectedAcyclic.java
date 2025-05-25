@@ -1,6 +1,6 @@
-package DailyQuestions;
+import java.util.*;
 
-public class AllAncestorsOfANodeInADirectedAcyclic {
+class  AllAncestorsOfANodeInADirectedAcyclic {
 
     public List<List<Integer>> getAncestors(int n, int[][] edges) {
         List<List<Integer>> res = new ArrayList<>();
